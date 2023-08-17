@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const { data, pending, onClickHandler } = await useCardData('charachters', getCharacters())
+</script>
+
 <template>
   <div>
     <TheHero>
@@ -23,5 +27,11 @@
         </button>
       </div>
     </TheHero>
+
+    <CardData
+      :data="data"
+      :pending="pending"
+      :on-click-handler="onClickHandler"
+    />
   </div>
 </template>
