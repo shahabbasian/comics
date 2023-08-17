@@ -9,6 +9,7 @@ export default defineNuxtConfig({
   imports: {
     imports: [
       { name: 'useStoreHistory', from: '@/stores/history' },
+      { name: 'useStoreGuard', from: '@/stores/guard' }
     ]
   },
   runtimeConfig: {
