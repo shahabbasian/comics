@@ -2,7 +2,7 @@
 const storeHistory = useStoreHistory()
 const target = ref(null)
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'search'])
 
 onClickOutside(target, (event) => {
   if (event?.target?.id !== 'search-input') {
@@ -22,7 +22,7 @@ onClickOutside(target, (event) => {
       :key="index"
       class="h-8 flex items-center justify-between cursor-pointer"
     >
-      <span>{{ item }}</span>
+      <span @click="$emit('search', item)">{{ item }}</span>
       <SvgTheTimes
         class="h-5 w-auto"
         @click="storeHistory.removeHistory(index)"
