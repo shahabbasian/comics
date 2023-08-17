@@ -1,4 +1,4 @@
-export const useCardData = async (nameForChache: string, url: string) => {
+export const useCardData = async (nameForChache: string, url: string, query: boolean = true) => {
   const route = useRoute()
   const router = useRouter()
 
@@ -18,7 +18,7 @@ export const useCardData = async (nameForChache: string, url: string) => {
         },
         results: data?.data?.results?.map((item: any) => ({
           id: item.id,
-          name: item.name,
+          name: item.name ?? item.title,
           description: item.description,
           image: `${item.thumbnail.path}.${item.thumbnail.extension}`
         })) || []
@@ -28,7 +28,9 @@ export const useCardData = async (nameForChache: string, url: string) => {
 
   const onPageHandler = (page: number) => {
     offset.value = (page - 1) * limit.value
-    router.push({ query: { page } })
+    if (query) {
+      router.push({ query: { page } })
+    }
     refresh()
   }
 

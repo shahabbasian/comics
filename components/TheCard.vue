@@ -1,7 +1,9 @@
 <script setup lang="ts">
 interface Props {
+  id: number;
   image: string;
   name: string;
+  characterLink: boolean;
   description?: string;
 }
 
@@ -9,7 +11,10 @@ defineProps<Props>()
 </script>
 
 <template>
-  <div class="card bg-base-200 shadow-xl">
+  <NuxtLink
+    :to="characterLink ? `/character/${id}` : ''"
+    class="card bg-base-200 shadow-xl"
+  >
     <figure class="h-52 w-auto">
       <img
         :src="image"
@@ -24,5 +29,5 @@ defineProps<Props>()
         {{ description }}
       </p>
     </div>
-  </div>
+  </NuxtLink>
 </template>
