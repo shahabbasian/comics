@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const route = useRoute()
+const storeGuard = useStoreGuard()
 
 const { data, pending, onPageHandler, onSearchHandler } = await useCardData('charachters', getCharacters())
 
@@ -54,6 +55,16 @@ const searchFromHistory = (payload: string) => {
         >
           Search
         </button>
+      </div>
+
+      <div class="mt-4 w-full flex justify-center">
+        <div
+          class="btn"
+          :class="[storeGuard.getPermission ? 'btn-primary' : 'btn-secondary']"
+          @click="storeGuard.togglePermission()"
+        >
+          Permission <span v-if="storeGuard.getPermission">ON</span><span v-else>OFF</span>
+        </div>
       </div>
     </TheHero>
 

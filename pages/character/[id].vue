@@ -3,6 +3,10 @@ const route = useRoute()
 
 const { data: comics, pending: comicsPending, onPageHandler: onComicsPageHandler } = await useCardData(`charachter-${route.params.id}-comics`, getComics(route.params.id), false)
 const { data: series, pending: seriesPending, onPageHandler: onSeriesPageHandler } = await useCardData(`charachter-${route.params.id}-series`, getSeries(route.params.id), false)
+
+definePageMeta({
+  middleware: ['guard']
+})
 </script>
 
 <template>
