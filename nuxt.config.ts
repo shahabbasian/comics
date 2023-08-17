@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   imports: {
     imports: [
-      { name: 'md5', from: 'crypto-js/md5' }
+      { name: 'useStoreHistory', from: '@/stores/history' },
     ]
   },
   runtimeConfig: {
@@ -22,6 +22,7 @@ export default defineNuxtConfig({
     '@nuxtjs/eslint-module',
     '@nuxtjs/tailwindcss',
     '@formkit/nuxt',
+    '@vueuse/nuxt',
     '@pinia/nuxt'
   ],
   tailwindcss: {
