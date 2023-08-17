@@ -1,5 +1,13 @@
 <script setup lang="ts">
-const { data, pending, onClickHandler } = await useCardData('charachters', getCharacters())
+const route = useRoute()
+
+const { data, pending, onPageHandler, onSearchHandler } = await useCardData('charachters', getCharacters())
+
+const nameForSearch = ref(route?.query?.search || '')
+
+const searchHandler = () => {
+  onSearchHandler(nameForSearch.value)
+}
 </script>
 
 <template>
@@ -9,20 +17,18 @@ const { data, pending, onClickHandler } = await useCardData('charachters', getCh
         <div>
           <div>
             <input
+              v-model="nameForSearch"
               class="input input-bordered join-item"
               placeholder="Search Character"
+              @keypress.enter="searchHandler"
             >
           </div>
         </div>
 
-        <select class="select select-bordered join-item">
-          <option selected>
-            Name
-          </option>
-          <option>Name starts with</option>
-        </select>
-
-        <button class="btn join-item">
+        <button
+          class="btn join-item"
+          @click="searchHandler"
+        >
           Search
         </button>
       </div>
@@ -31,7 +37,7 @@ const { data, pending, onClickHandler } = await useCardData('charachters', getCh
     <CardData
       :data="data"
       :pending="pending"
-      :on-click-handler="onClickHandler"
+      :on-click-handler="onPageHandler"
     />
   </div>
 </template>

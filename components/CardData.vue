@@ -7,7 +7,7 @@ interface Props {
 
 defineProps<Props>()
 
-const page = ref<number>(useRoute()?.query.page ? parseInt(useRoute().query.page) : 1)
+const page = ref(parseInt(useRoute()?.query?.page) || 1)
 </script>
 
 <template>
@@ -25,7 +25,10 @@ const page = ref<number>(useRoute()?.query.page ? parseInt(useRoute().query.page
       v-else
       class="flex flex-col gap-12"
     >
-      <div class="custom-grid">
+      <div
+        v-if="data.results.length > 0"
+        class="custom-grid"
+      >
         <TheCard
           v-for="item in data.results"
           :key="item.id"
@@ -33,6 +36,12 @@ const page = ref<number>(useRoute()?.query.page ? parseInt(useRoute().query.page
           :name="item.name"
           :description="item.description"
         />
+      </div>
+      <div
+        v-else
+        class="text-center"
+      >
+        Data not found.
       </div>
 
       <vue-awesome-paginate
