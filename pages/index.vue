@@ -8,6 +8,8 @@ const nameForSearch = ref(route?.query?.search || '')
 const searchHandler = () => {
   onSearchHandler(nameForSearch.value)
 }
+
+const openHistory = ref(false)
 </script>
 
 <template>
@@ -24,13 +26,19 @@ const searchHandler = () => {
     <TheHero>
       <div class="join join-vertical md:join-horizontal">
         <div>
-          <div>
+          <div class="flex flex-col">
             <input
+              id="search-input"
               v-model="nameForSearch"
               class="input input-bordered join-item"
               placeholder="Search Character"
               @keypress.enter="searchHandler"
+              @focus="openHistory = true"
             >
+            <TheHistory
+              v-if="openHistory"
+              @close="openHistory = false"
+            />
           </div>
         </div>
 

@@ -1,6 +1,7 @@
 export const useCardData = async (nameForChache: string, url: string, query: boolean = true) => {
   const route = useRoute()
   const router = useRouter()
+  const storeHistory = useStoreHistory()
 
   const page = ref(route?.query?.page ? parseInt(route.query.page) : 1)
   const nameForSearch = ref(route?.query?.search || null)
@@ -38,6 +39,7 @@ export const useCardData = async (nameForChache: string, url: string, query: boo
     nameForSearch.value = name
     offset.value = 0
     if (nameForSearch.value) {
+      storeHistory.addHistory(nameForSearch.value)
       router.push({ query: { search: nameForSearch.value } })
     } else {
       router.push({ query: {} })
