@@ -10,6 +10,11 @@ const searchHandler = () => {
 }
 
 const openHistory = ref(false)
+
+const searchFromHistory = (payload: string) => {
+  nameForSearch.value = payload
+  searchHandler()
+}
 </script>
 
 <template>
@@ -38,6 +43,7 @@ const openHistory = ref(false)
             <TheHistory
               v-if="openHistory"
               @close="openHistory = false"
+              @search="searchFromHistory"
             />
           </div>
         </div>
