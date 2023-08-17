@@ -34,6 +34,7 @@ export const useCardData = async (nameForChache: string, url: string) => {
 
   const onSearchHandler = (name: string) => {
     nameForSearch.value = name
+    offset.value = 0
     if (nameForSearch.value) {
       router.push({ query: { search: nameForSearch.value } })
     } else {

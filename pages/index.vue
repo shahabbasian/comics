@@ -12,6 +12,15 @@ const searchHandler = () => {
 
 <template>
   <div>
+    <Head>
+      <Title v-if="$route?.query?.page && $route.query.page !== '1'">
+        Comics Character - page {{ $route.query.page }}
+      </Title>
+      <Title v-if="$route?.query?.search">
+        Comics Character - search = {{ $route.query.search }}
+      </Title>
+    </Head>
+
     <TheHero>
       <div class="join join-vertical md:join-horizontal">
         <div>
