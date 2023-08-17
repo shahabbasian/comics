@@ -47,6 +47,7 @@ const searchHandler = () => {
       :data="data"
       :pending="pending"
       :on-click-handler="onPageHandler"
+      character-link
     />
   </div>
 </template>

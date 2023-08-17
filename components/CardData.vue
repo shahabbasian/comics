@@ -2,10 +2,13 @@
 interface Props {
   data: object;
   pending: boolean;
+  characterLink?: boolean;
   onClickHandler: any;
 }
 
-defineProps<Props>()
+withDefaults(defineProps<Props>(), {
+  characterLink: false
+})
 
 const page = ref(parseInt(useRoute()?.query?.page) || 1)
 </script>
@@ -31,10 +34,12 @@ const page = ref(parseInt(useRoute()?.query?.page) || 1)
       >
         <TheCard
           v-for="item in data.results"
+          :id="item.id"
           :key="item.id"
           :image="item.image"
           :name="item.name"
           :description="item.description"
+          :character-link="characterLink"
         />
       </div>
       <div
