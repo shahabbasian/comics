@@ -1,4 +1,4 @@
-export const useCardData = async (nameForChache: string, url: string, query: boolean = true) => {
+export const useCardData = async (nameForChache: string, url: string, searchFor: string = 'character', query: boolean = true) => {
   const route = useRoute()
   const router = useRouter()
   const storeHistory = useStoreHistory()
@@ -8,7 +8,7 @@ export const useCardData = async (nameForChache: string, url: string, query: boo
   const limit = ref(20)
   const offset = ref(page.value ? ((page.value - 1) * limit.value) : 0)
 
-  const { data, pending, refresh } = await useAsyncData(`${nameForChache}-${offset.value}`, () => useApiRequest(url, (nameForSearch.value ? { offset: offset.value, limit: limit.value, name: nameForSearch.value } : { offset: offset.value, limit: limit.value })), {
+  const { data, pending, refresh } = await useAsyncData(`${nameForChache}-${offset.value}`, () => useApiRequest(url, (nameForSearch.value ? (searchFor === 'character' ? { offset: offset.value, limit: limit.value, name: nameForSearch.value } : { offset: offset.value, limit: limit.value, title: nameForSearch.value }) : { offset: offset.value, limit: limit.value })), {
     transform: (data: object) => {
       return <object>{
         pagination: {
